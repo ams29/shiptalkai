@@ -26,7 +26,7 @@ class Message(BaseModel):
 # Function to call the OpenAI Chat API
 def call_openai_assistant(all_messages):
     response = openai.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-4o",
         messages=all_messages
     )
     assistant_response = response.choices[0].message.content.strip()
