@@ -1,0 +1,130 @@
+# ShipTalk AI Assistant API Documentation
+
+Welcome to the **ShipTalk AI Assistant API**. This API allows you to interact with ShipTalk AI, an assistant that provides information on logistics, parcels, and shipping based on content from the ShipTalk forum.
+
+## Base URL
+
+```
+https://shiptalkai.onrender.com
+```
+
+## Endpoints
+
+### 1. GET `/`
+
+**Description:** Check if the API is running.
+
+**Request:**
+
+- **Method:** `GET`
+- **URL:** `https://shiptalkai.onrender.com/`
+
+**Response:**
+
+- **Status Code:** `200 OK`
+- **Body:**
+
+  ```json
+  {
+    "message": "Welcome to the Orchestro AI assistant API!"
+  }
+  ```
+
+### 2. POST `/chat/`
+
+**Description:** Send a message to ShipTalk AI and receive a response.
+
+**Request:**
+
+- **Method:** `POST`
+- **URL:** `https://shiptalkai.onrender.com/chat/`
+- **Headers:**
+
+  - `Content-Type`: `application/json`
+
+- **Body:**
+
+  ```json
+  {
+    "user_message": "Your question here",
+    "conversation_history": [
+      {
+        "role": "user" or "assistant" or "system",
+        "content": "Previous message content"
+      }
+      // ... additional messages if any
+    ]
+  }
+  ```
+
+**Parameters:**
+
+- `user_message` (string): The user's current message.
+- `conversation_history` (array): Previous messages in the conversation for context.
+
+**Response:**
+
+- **Status Code:** `200 OK`
+- **Body:**
+
+  ```json
+  {
+    "assistant_response": "Assistant's reply",
+    "conversation_history": [
+      // Updated conversation history including the latest messages
+    ]
+  }
+  ```
+
+**Fields:**
+
+- `assistant_response` (string): The assistant's reply to the user's message.
+- `conversation_history` (array): The updated conversation history.
+
+## Example Usage
+
+### Request
+
+```json
+POST https://shiptalkai.onrender.com/chat/
+Content-Type: application/json
+
+{
+  "user_message": "What are the best practices for shipping fragile items?",
+  "conversation_history": []
+}
+```
+
+### Response
+
+```json
+{
+  "assistant_response": "When shipping fragile items, it's important to use plenty of cushioning materials like bubble wrap and packing peanuts. Ensure that the item is securely placed in the center of the box and there is at least two inches of padding on all sides. Members on the ShipTalk forum also recommend double-boxing for extra protection.",
+  "conversation_history": [
+    {
+      "role": "system",
+      "content": "You are ShipTalk AI, the assistant for the ShipTalk forum..."
+    },
+    {
+      "role": "user",
+      "content": "What are the best practices for shipping fragile items?"
+    },
+    {
+      "role": "assistant",
+      "content": "When shipping fragile items, it's important to use plenty of cushioning materials..."
+    }
+  ]
+}
+```
+
+## Notes
+
+- **Conversation History:** Include previous messages in `conversation_history` to maintain context.
+- **Roles in Conversation History:**
+  - `"user"`: Messages from the user.
+  - `"assistant"`: Responses from ShipTalk AI.
+  - `"system"`: System prompts initializing the assistant.
+
+## Contact
+
+For support or questions, please contact `support@shiptalkai.com`.
