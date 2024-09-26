@@ -42,7 +42,7 @@ def read_root():
 @app.post("/chat/")
 async def chat(message: Message):
     # Initialize the conversation if it's the first message
-    if len(message.conversation_history) == 0:
+    if len(message.conversation_history) is not 0:
         message.conversation_history.append({
             "role": "system",
             "content": """
